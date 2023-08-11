@@ -14,7 +14,26 @@ function fetchPhotos(searchQuery) {
         method: 'GET',
     })
     .then(response=>{
-        console.log(response.data);
+        response.data.hits.map(({
+            webformatURL,
+            largeImageURL,
+            tags,
+            likes,
+            views,
+            comments,
+            downloads
+        })=>{
+            let returnedResult = {
+                webformatURL,
+                largeImageURL,
+                tags,
+                likes,
+                views,
+                comments,
+                downloads
+            }
+            console.log(returnedResult);
+        });
     });
 };
 
