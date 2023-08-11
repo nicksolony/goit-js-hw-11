@@ -6,14 +6,15 @@ let IMAGE_TYPE = 'photo';
 let ORIENT = 'horizontal';
 let SAFE_SEARCH = 'true';
 
-function fetchPhotos(searchQuery) {
+async function fetchPhotos(searchQuery) {
     let url = `${BASE_URL}?key=${API_KEY}&q=${searchQuery}&image_type=${IMAGE_TYPE}&orientation=${ORIENT}&safesearch=${SAFE_SEARCH}`;
-    return axios({
+
+    let response = await axios({
         baseURL: url,
         method: 'GET',
-    })
-    .then(response=>{
-        return response.data.hits.map(({
+    });
+
+    let resultsArray = await response.data.hits.map(({
             webformatURL,
             largeImageURL,
             tags,
@@ -33,7 +34,7 @@ function fetchPhotos(searchQuery) {
             }
             return returnedResult
         });
-    });
+    return resultsArray;
 };
 
 export default fetchPhotos;
