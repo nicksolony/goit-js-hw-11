@@ -8,13 +8,12 @@ let SAFE_SEARCH = 'true';
 
 function fetchPhotos(searchQuery) {
     let url = `${BASE_URL}?key=${API_KEY}&q=${searchQuery}&image_type=${IMAGE_TYPE}&orientation=${ORIENT}&safesearch=${SAFE_SEARCH}`;
-    console.log(url);
     return axios({
         baseURL: url,
         method: 'GET',
     })
     .then(response=>{
-        response.data.hits.map(({
+        return response.data.hits.map(({
             webformatURL,
             largeImageURL,
             tags,
@@ -32,7 +31,7 @@ function fetchPhotos(searchQuery) {
                 comments,
                 downloads
             }
-            console.log(returnedResult);
+            return returnedResult
         });
     });
 };
