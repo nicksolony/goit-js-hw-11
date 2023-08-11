@@ -1,7 +1,11 @@
+import pixabayApi from "./js/pixabay-api"
+import { Notify } from "notiflix";
+
 let formEl = document.querySelector(`#search-form`);
 
 
 formEl.addEventListener(`submit`, (e) => {
     e.preventDefault();
-    console.log(e.target.searchQuery.value);
+    pixabayApi(e.target.searchQuery.value)
 })
+
