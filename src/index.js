@@ -19,10 +19,12 @@ Notify.init({
 formEl.addEventListener(`submit`, (e) => {
     e.preventDefault();
     searchImg(e.target.searchQuery.value)
+    e.target.searchQuery.value = '';
 })
 
 async function searchImg(searchQuery) {
     try {
+        clearGallery();
        let result = await pixabayApi(searchQuery);
        galleryEl.insertAdjacentHTML('beforeend', imgTpl(result))
        if (!result[0]) {
@@ -31,7 +33,9 @@ async function searchImg(searchQuery) {
        console.log(result);   
     } catch (err) {
         Notify.failure(`We're sorry, an error has occurred. Please reload this page and try again.`);
-    }
+    };
+};
 
-
+function clearGallery() {
+    galleryEl.innerHTML="";
 }
