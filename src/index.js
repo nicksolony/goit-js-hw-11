@@ -19,7 +19,6 @@ Notify.init({
 formEl.addEventListener(`submit`, (e) => {
     e.preventDefault();
     searchImg(e.target.searchQuery.value)
-    e.target.searchQuery.value = '';
 })
 
 async function searchImg(searchQuery) {
