@@ -3,17 +3,35 @@
 
     margin-left: auto;
     margin-right: auto;
-    gap: 0px;
 }
 
-.gallery, .info {
+.gallery {
     display: flex;
     flex-wrap: wrap;
 }
 
 .photo-card {
-    width: 25%;
-    border-color: black;
-    padding: 15px;
+    background-color: antiquewhite;
+    border-color:black;
+    border: 1px solid;
+    width: 282px;
+    padding-top: 10px;
 }
 
+.photo-card:not(:nth-child(4n)) {
+    margin-right: 21px;
+}
+
+.photo-card img {
+   width: 240px;
+   padding-left: 21px;
+   padding-right: 21px;
+}
+
+.info{
+    display: flex;
+}
+
+.info-item {
+    text-align: center;
+}
