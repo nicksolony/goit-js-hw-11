@@ -39,8 +39,7 @@ async function searchImg(searchQuery) {
        galleryEl.insertAdjacentHTML('beforeend', imgTpl(result))
        if (!result[0]) {
         Notify.failure('Sorry, there are no images matching your search query. Please try again.')
-       }
-       console.log(result);   
+       } 
     } catch (err) {
         Notify.failure(`We're sorry, an error has occurred. Please reload this page and try again.`);
     };

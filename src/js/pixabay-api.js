@@ -55,16 +55,13 @@ export default class PixabayApi {
       resetPage() {
         this.page = 1;
       };
-    
-      get query() {
-        return this.searchQuery;
-      };
+
     
       set query(newQuery) {
         this.searchQuery = newQuery;
       };
 }
-// export default fetchPhotos;
+
 
 
 
