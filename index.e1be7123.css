@@ -1,0 +1,2 @@
+.gallery{width:1200px;flex-wrap:wrap;margin-left:auto;margin-right:auto;display:flex}.photo-card{width:282px;background-color:#faebd7;border:1px solid;padding-top:10px}.photo-card:not(:nth-child(4n)){margin-right:21px}.photo-card img{width:240px;padding-left:21px;padding-right:21px}.info{display:flex}.info-item{text-align:center}
+/*# sourceMappingURL=index.e1be7123.css.map */
