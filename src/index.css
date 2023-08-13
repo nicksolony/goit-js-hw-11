@@ -35,3 +35,7 @@
 .info-item {
     text-align: center;
 }
+
+.is-hidden {
+    display: none;
+}
