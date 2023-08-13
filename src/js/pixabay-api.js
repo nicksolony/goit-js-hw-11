@@ -5,25 +5,25 @@ let BASE_URL = 'https://pixabay.com/api/';
 let IMAGE_TYPE = 'photo';
 let ORIENT = 'horizontal';
 let SAFE_SEARCH = 'true';
+let PER_PAGE = 40;
 
-async function fetchPhotos(searchQuery) {
-    let url = `${BASE_URL}?key=${API_KEY}&q=${searchQuery}&image_type=${IMAGE_TYPE}&orientation=${ORIENT}&safesearch=${SAFE_SEARCH}`;
+export default class PixabayApi {
 
-    let response = await axios({
-        baseURL: url,
-        method: 'GET',
-    });
+    constructor() {
+        this.searchQuery = '';
+        this.page = 1;        
+    }
 
-    let resultsArray = await response.data.hits.map(({
-            webformatURL,
-            largeImageURL,
-            tags,
-            likes,
-            views,
-            comments,
-            downloads
-        })=>{
-            let returnedResult = {
+
+    async fetchPhotos() {
+        let url = `${BASE_URL}?key=${API_KEY}&q=${this.searchQuery}&image_type=${IMAGE_TYPE}&orientation=${ORIENT}&safesearch=${SAFE_SEARCH}&per_page=${PER_PAGE}&page=${this.page}`;
+
+        let response = await axios({
+            baseURL: url,
+            method: 'GET',
+        });
+
+        let resultsArray = await response.data.hits.map(({
                 webformatURL,
                 largeImageURL,
                 tags,
@@ -31,13 +31,40 @@ async function fetchPhotos(searchQuery) {
                 views,
                 comments,
                 downloads
-            }
-            return returnedResult
-        });
-    return resultsArray;
-};
+            })=>{
+                let returnedResult = {
+                    webformatURL,
+                    largeImageURL,
+                    tags,
+                    likes,
+                    views,
+                    comments,
+                    downloads
+                }
+                return returnedResult
+            });
+            this.incrementPage()
+            return resultsArray;
+    };
 
-export default fetchPhotos;
+
+    incrementPage() {
+        this.page += 1;
+      };
+    
+      resetPage() {
+        this.page = 1;
+      };
+    
+      get query() {
+        return this.searchQuery;
+      };
+    
+      set query(newQuery) {
+        this.searchQuery = newQuery;
+      };
+}
+// export default fetchPhotos;
 
 
 

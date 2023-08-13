@@ -1,4 +1,4 @@
-import pixabayApi from "./js/pixabay-api"
+import PixabayApi from "./js/pixabay-api"
 import { Notify } from "notiflix";
 import Handlebars from "handlebars";
 import imgTpl from './hbs/img.hbs';
@@ -16,6 +16,8 @@ Notify.init({
     clickToClose: true
 })
 
+let pixabayApi = new PixabayApi();
+
 formEl.addEventListener(`submit`, (e) => {
     e.preventDefault();
     searchImg(e.target.searchQuery.value)
@@ -23,8 +25,11 @@ formEl.addEventListener(`submit`, (e) => {
 
 async function searchImg(searchQuery) {
     try {
+        pixabayApi.query = searchQuery;
+
+        pixabayApi.resetPage();
         clearGallery();
-       let result = await pixabayApi(searchQuery);
+       let result = await pixabayApi.fetchPhotos();
        galleryEl.insertAdjacentHTML('beforeend', imgTpl(result))
        if (!result[0]) {
         Notify.failure('Sorry, there are no images matching your search query. Please try again.')
